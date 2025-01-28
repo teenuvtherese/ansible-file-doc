@@ -1,0 +1,9 @@
+---
+- name: Using variables
+  hosts: servera.lab.example.com
+  vars_files:
+    - more_vars.yml
+  tasks:
+    - name: Print the message
+      ansible.builtin.debug:
+        msg: "{{ myvar }}"

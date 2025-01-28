@@ -1,0 +1,11 @@
+---
+- name: Define a loop
+  hosts: servera.lab.example.com
+  tasks:
+    - name: Create the database users
+      ansible.builtin.debug:
+        msg: "The {{item}} will be created"
+      loop:
+        - db_admin
+        - db_user
+        - db_bkpuser

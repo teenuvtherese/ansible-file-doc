@@ -1,0 +1,7 @@
+---
+- name: Gather all facts
+  hosts: all
+  tasks:
+    - name: Print all facts
+      ansible.builtin.debug:
+        msg: The default IPV4 address of {{ ansible_facts.fqdn }} is {{ ansible_facts.default_ipv4.address }}

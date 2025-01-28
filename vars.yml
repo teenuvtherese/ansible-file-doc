@@ -1,0 +1,9 @@
+---
+- name: play to demonstrate a vraible usage
+  hosts: servera.lab.example.com
+  vars:
+    pkg: httpd
+  tasks:  
+    - name: Task to display a message
+      ansible.builtin.debug:
+        msg: "The value of the variable pkg is: {{pkg}}"

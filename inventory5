@@ -1,0 +1,5 @@
+server[01:20].example.com
+
+[a:c].dns.example.com
+
+2001:db8::[a:f]

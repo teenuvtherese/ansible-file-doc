@@ -1,0 +1,11 @@
+[usa]
+washington1.example.com
+washington2.example.com
+
+[canada]
+ontario01.example.com
+ontario02.example.com
+
+[north_america:children]
+canada
+usa

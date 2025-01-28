@@ -1,0 +1,10 @@
+---
+- name: Play to register an output
+  hosts: servera.lab.example.com
+  tasks:
+    - name: run uptime on remotebox
+      ansible.builtin.command:
+        cmd: uptime
+      register: apple
+    - ansible.builtin.debug:
+        var: apple.stdout
