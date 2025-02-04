@@ -1,0 +1,14 @@
+---
+- name: Loop dictonaries
+  hosts: servera
+  tasks: 
+    - name: user exist and are in the correct groups
+      ansible.builtin.user:
+        name: "{{ item.name }}"
+        state: present
+        groups: "{{ item.groups }}"
+      loop:
+        - name: alen
+          groups: wheel
+        - name: jacob
+          groups: root

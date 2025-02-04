@@ -1,0 +1,13 @@
+---
+- name: using register variables
+  hosts: servera
+  tasks:
+    - name: Print task1
+      ansible.builtin.shell: "echo This is my item: {{ item }}"
+      loop:
+        - one
+        - two
+      register: echo_results
+    - name: Show the output
+      ansible.builtin.debug:
+        var: echo_results

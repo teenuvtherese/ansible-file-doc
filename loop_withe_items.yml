@@ -1,0 +1,13 @@
+---
+- name: Demo for loop with_items
+  hosts: servera
+  vars:
+    db_userss:
+      - db_admin
+      - db_user
+      - db_bkpuser
+  tasks:
+    - name: Create the database users
+      ansible.builtin.debug:
+        msg: "The {{ item }} will be created"
+      with_items: "{{db_userss}}"
