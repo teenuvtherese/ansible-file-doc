@@ -1,0 +1,7 @@
+---
+- name: Magic variable
+  hosts: servera
+  tasks:
+    - name: Print network interfaces
+      ansible.builtin.debug:
+        var: hostvars['servera']['ansible_facts']['interfaces']
