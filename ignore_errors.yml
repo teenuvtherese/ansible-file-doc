@@ -1,0 +1,9 @@
+---
+- name: Ignore errors in tasks
+  hosts: servera
+  tasks:
+    - name: Latest version of notapkg is installed
+      ansible.builtin.dnf:
+        name: notapkg
+        state: latest
+      ignore_errors: true

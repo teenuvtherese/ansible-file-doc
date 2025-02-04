@@ -1,0 +1,12 @@
+---
+- name: Install webserver
+  hosts: servera
+  tasks:
+    - name: Set custom variable
+      ansible.builtin.set_fact:
+        custom: "{{ ansible_facts['ansible_local']['custom']['general']}}"
+        custom_host: "{{ ansible_facts['ansible_local']['custom'] }}"
+    - name: Install the package
+      ansible.builtin.dnf:
+        name: "{{ custom['pkg'] }}"
+        state: latest

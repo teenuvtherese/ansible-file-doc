@@ -1,0 +1,22 @@
+---
+- name: Install and start Apache HTTPD
+  hosts: servera
+  force_handlers: yes
+  tasks:
+    - name: Install the latest version of Apache  
+      ansible.builtin.dnf:
+        name: httpd
+        state: latest
+      notify: restart httpd
+  
+    - name: Install the latest version of vsftpd
+      ansible.builtin.dnf:
+        name: vsftp
+        state: latest
+  
+  handlers: 
+    - name: restart httpd
+      ansible.builtin.service:
+        name: httpd
+        state: restarted
+        enabled: yes
