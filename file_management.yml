@@ -1,0 +1,68 @@
+--- 
+- name: Preparing servers
+  hosts: servers
+  
+  tasks:
+    - name: Fetch the /var/log/secure log file from managed hosts
+      ansible.builtin.fetch:
+        src: /var/log/secure
+        dest: secure-backups
+
+    - name: Ensure that /home/devops/files directory create with the following attributes
+      ansible.builtin.file:
+        path: /home/devops/files
+        state: directory
+        owner: devops
+        group: devops
+        mode: 0775
+        setype: _default
+
+    - name: Add a single line of text to a file
+      ansible.builtin.lineinfile:
+        path: /home/devops/files/users.txt
+        line: This is an example for linein module
+        state: present
+        create: true
+        owner: devops
+        group: devops
+        mode: 0664
+
+    - name: Copy a file to managed hosts and set ownership and permissions
+      ansible.builtin.copy:
+        src: system
+        dest: /home/devops/files
+        owner: devops
+        group: devops
+        mode: 0664
+
+    - name: Add a block of text to an existing an file
+      ansible.builtin.blockinfile:
+        path: /home/devops/files/users.txt
+        block: |
+          This block of text consists of two lines.
+          hbvhfbvfrvnr
+        state: present
+
+    - name: Stat module
+      ansible.builtin.stat:
+        path: /home/devops/files/users.txt
+        
+      register: file_stat
+
+    - ansible.builtin.debug:
+        msg: "file exists"
+        #var: file_stat
+      when: file_stat.stat.exists
+
+    - name: Synchronize
+      ansible.posix.synchronize:
+        src: system
+        dest: /home/devops/files
+
+#- name: remove directory
+ # hosts: servers
+  # tasks:
+#    - name: Remove a directory
+ #     ansible.builtin.file:
+  #      path: /home/devops/files
+   #     state: absent
